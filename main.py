@@ -7,9 +7,13 @@ import requests
 import emoji
 import time
 import concurrent.futures
+if os.path.exists("plugins/DSM.py"):
+    from plugins.DSM import *
+from qgui.qd import *
 goodtokens = 0
 badtokens = 0
 valid_tokens = []
+version = "1.3"
 def great_message(message):
     print(emoji.emojize(f"{message}"))
 def write_valid_tokens(filename, tokens):
@@ -74,9 +78,9 @@ def check_token(token):
                 great_message(' :rocket: Account have nitro!')
             else:
                 great_message(' :rock: Dont have active nitro sub')
-            friends = requests.get('https://discord.com/api/v8/users/@me/relationships', headers=headers)
-            for i in friends.json():
-                friends_list.append(i, ' - ', ['username'])
+            # friends = requests.get('https://discord.com/api/v8/users/@me/relationships', headers=headers)
+            # for i in friends.json():
+            #     friends_list.append(f"{i} {'username'}")
             valid_tokens.append(token)
             great_message(f" :closed_mailbox_with_raised_flag:email - {email}\n :mobile_phone:phone - {phone}\n :people_hugging:friends - {friends_list}")
         else:
@@ -92,13 +96,33 @@ def check_token(token):
     full_logsfile('full_logsfile.txt', username, email, phone, verified, nitro, friends_list, token)
     return username, email, phone, token, nitro, verified
 def main():
+    vergh = "https://githubraw.com/quickyyy/Discer/main/version"
     os.system("cls")
-    print("Welcome to the Discer! Discord token checker\n Dev - https://zelenka.guru/quka/ | My Telegram blog - https://t.me/bredcookie")
-    token_file = input("Please, enter a directory with tokens.txt (If not specified, the script directory will be checked): ")
+    os.system("title Discer / @bredcookie / Version: getting..")
+    getinfo("Welcome", "Welcome to the Discer - Discord token checker") 
+    getinfo("Welcome", "Dev - https://zelenka.guru/quka/ | My Telegram blog - https://t.me/bredcookie")
+    lastver = getver(vergh)
+    comparison_result = compare_versions(version, lastver)
+    if comparison_result == 1:
+        getinfo("Version", f"{Fore.WHITE}Version of script: {version}{Style.RESET_ALL} Version of last script: {lastver} (Чего блять? У тебя бета что-ли?)")
+        os.system(f"title Discer / @bredcookie / Version: {version} (beta?)")
+    elif comparison_result == -1:
+        getinfo("Version", f"{Fore.WHITE}New version of script avalibale! Re-download from creator{Style.RESET_ALL}")
+        getinfo("Version", f"{Fore.WHITE}Version of script: {version}{Style.RESET_ALL} Version of last script: {lastver}")
+        os.system(f"title Discer / @bredcookie / Version: {version} (OLD)")
+    elif comparison_result == 0:
+        getinfo("Version", f"{Fore.WHITE}Version of script: {version}{Style.RESET_ALL} You have last version, cool!")
+        os.system(f"title Discer / @bredcookie / Version: {version}")
+    if os.path.exists("plugins/DSM.py"):
+        getinfo("DSM", "DSM Plugin finded")
+    token_file = coolinput("Please, enter token file name (If not specified, the tokens.txt will be checked): ")
     if token_file == '':
         token_file = os.getcwd() + "/tokens.txt"
+    else:
+        token_file = os.getcwd() + "/" + token_file
     global num_threads
-    num_threads = int(input("Enter the number of threads: "))
+    num_threads = int(coolinput("Enter the number of threads: "))
+
     
     with open(token_file, 'r', encoding="utf-8") as infile:
         lines = infile.readlines()
@@ -111,18 +135,26 @@ def main():
             except Exception as exc:
                 print(f"An error occurred: {exc}")
 
-    write_valid_tokens('valid_tokens.txt', valid_tokens)
+    #write_valid_tokens('valid_tokens.txt', valid_tokens)
     
     if badtokens > goodtokens:
-        great_message(f":bar_chart:All work is done! Stat for this check: {Fore.GREEN}:chart_decreasing: Good tokens - {goodtokens}{Style.RESET_ALL} | {Fore.RED}:chart_increasing: Bad tokens - {badtokens}{Style.RESET_ALL} | :input_numbers: Amount of tokens : {goodtokens+badtokens}")
+         great_message(f":bar_chart:All work is done! Stat for this check: {Fore.GREEN}:chart_decreasing: Good tokens - {goodtokens}{Style.RESET_ALL} | {Fore.RED}:chart_increasing: Bad tokens - {badtokens}{Style.RESET_ALL} | :input_numbers: Amount of tokens : {goodtokens+badtokens}")
     else:
-        great_message(f":bar_chart:All work is done! Stat for this check: {Fore.GREEN}:chart_increasing: Good tokens - {goodtokens}{Style.RESET_ALL} | {Fore.RED}:chart_decreasing: Bad tokens - {badtokens}{Style.RESET_ALL} | :input_numbers: Amount of tokens : {goodtokens+badtokens}")
+         great_message(f":bar_chart:All work is done! Stat for this check: {Fore.GREEN}:chart_increasing: Good tokens - {goodtokens}{Style.RESET_ALL} | {Fore.RED}:chart_decreasing: Bad tokens - {badtokens}{Style.RESET_ALL} | :input_numbers: Amount of tokens : {goodtokens+badtokens}")
+    getinfo("DSM",f"Would you like to spam {goodtokens} tokens in private messages? (Yes/No)")
+    DSMON = coolinput("")
+    if DSMON == "yes".lower():
+        spammessage = coolinput("What message do you want to send across all valid tokens?: ")
+        for goodtoken in goodtokens:
+            send_message_to_private_channels(goodtoken, spammessage)
+    else:
+        getinfo("DSM", "DSM turned off. Bye!")
 
 if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        print("Get ctrl+c!")
+        geterror("keyboard", "Get ctrl+c!")
         if badtokens > goodtokens:
             great_message(f":bar_chart:All work is done! Stats for this check: {Fore.GREEN}:chart_decreasing: Good tokens - {goodtokens}{Style.RESET_ALL} | {Fore.RED}:chart_increasing: Bad tokens - {badtokens}{Style.RESET_ALL} | :input_numbers: Amount of tokens : {goodtokens+badtokens}")
         else:
