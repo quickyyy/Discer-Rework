@@ -1,56 +1,57 @@
+    ______________________________________________________
+    $$$$$$$..|$$/..._______..._______...______....______..
+    $$.|..$$.|/..|./.......|./.......|./......\../......\.
+    $$.|..$$.|$$.|/$$$$$$$/./$$$$$$$/./$$$$$$..|/$$$$$$..|
+    $$.|..$$.|$$.|$$......\.$$.|......$$....$$.|$$.|..$$/.
+    $$.|__$$.|$$.|.$$$$$$..|$$.\_____.$$$$$$$$/.$$.|......
+    $$....$$/.$$.|/.....$$/.$$.......|$$.......|$$.|......
+    $$$$$$$/..$$/.$$$$$$$/...$$$$$$$/..$$$$$$$/.$$/....... Rework :D
+    ______________________________________________________
+## Translations:
 
-![Logo](https://cdn.discordapp.com/attachments/762363252143161355/1140292912098332672/361b6cfc52462fbc3928adeb828df2d9.png)
-
-[![telegram](https://img.shields.io/badge/Мой%20Телеграм%20Блог-0099cc)](https://t.me/bredcookie)
-
-
-
-## Description
-    DISCER - Образован от Discord и Checker. Второй проект из цикла чекеров от меня, имеет
-    проверку на авторег, нитро, почту, телефон, друзей и никнейм.
-
-Умеет парсить из tokens.txt, проходится по всем директориям в папках пока не умеет, скоро добавлю
-## Пример лога в файле
-```
-📝Username - nickname
- 🪨 Does not have an active nitro sub
- ❌ It seems like the account is auto-reg
- 📋 token - *its a token, ok?*
- 📫email - google@gmail.com
- 📱phone - None
- 🫂friends - []
-```
-## Пример лога в консоли
-```
-✅ Valid - *its a token, ok?*
-📋 Getting info about token..
-📝Username - nickname
- ❌ Is seems like account auto-reg
- 🪨 Dont have active nitro sub
- 📫email - google@gmail.com
- 📱phone - None
- 🫂friends - []
-```
-## Установка и использование
+ - [RU]()
 
 
-```python
-  pip install -r requirements.txt
-  py main.py
-```
-    Далее все интуитивно понятно, программа спрашивает и распрашивает вас обо всем.
-## TODO
+## Welcome to Discer Rework!
 
-- Конфиг с настройками
-- Графические изменения
-- *Добавление прокси к чеку*
-- Отстук в телеграм
-- Проверка на администрирование в каналах
-- *Проспам по токенам*
-- ~~*Многопоток*~~ Реализовано
-## 🔗 Links
-[![telegram](https://img.shields.io/badge/Мой%20Телеграм%20Блог-0099cc)](https://t.me/bredcookie)
-Да, второй раз, а вы что хотели?
+Discer rework - is a rework of my old project of checker (and not only?) discord tokens
+## The changes that have been made
+
+- Complete overhaul of the structure and code as a whole
+- Changing the output in the console
+- Now there's a compiled version (woo, yoohoo!)
+- Changed and redesigned settings
+- There should be no more problems with the path, you can specify any absolute or short path in the script directory.
+- The design and flow of the project has been coordinately changed
+- Now checks for discord badges (Testing function)
+## Roadmap
+
+- add multithreading as in the old version
+
+- Screw the gui?
+
+- Suggest your variations to @bredcookie
+
+
+## FAQ
+
+#### Why not use proxy/fake_useragent?
+
+For discord, it doesn't matter how many requests come from one IP, at least on tests. fake_useragent is also not important, additionally, Nuitka does not want to work with it.
+
+#### What are the settings in discer.q3 responsible for?
+
+- printdebuglines - bool (True/False) - Outputs debug lines to the console (not too necessary for the average user)
+- simpleverify - bool (True/False) - Doesn't display account details in the console (which means nowhere yet)
+- checkonbadges - bool (True/False) - Since this is a feature being tested, I've added enabling and disabling it in the settings (I may remove it after public tests)
+- printinvalidtokens - bool (True/False) - is responsible for outputting invalid tokens to the console (If False, it will only output an error about invalid token)
+- sslverificationonrequest - bool (True/False) - Disables ssl check on request to discord (On tests, helped to revive the checker)
+All these settings are changed by changing the discer.q3 file, if it is not in the directory, the script will create a config and ask the user to change it and restart discer.
+## Support
+
+For support, dm me in  t.me/quicky_lzt or join our @bredcookie channel.
+
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
