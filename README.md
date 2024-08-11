@@ -9,7 +9,7 @@
     ______________________________________________________
 ## Translations:
 
- - [RU]()
+ - [RU](https://github.com/quickyyy/Discer-Rework/blob/main/READMERU.md)
 
 
 ## Welcome to Discer Rework!
