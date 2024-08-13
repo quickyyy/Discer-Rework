@@ -8,9 +8,11 @@ def check_nitro(response):
     if nitro_level > 0:
         log.debug('Account has nitro, checking what level..')
         nitro_type = nitro_types.get(nitro_level, 'Cant get nitro level.')
-        return log.info(f'Nitro level is {nitro_type}')
+        log.info(f'Nitro level is {nitro_type}')
+        return nitro_type
     else:
-        return log.debug('Nitro not found.')
+        log.debug('Nitro not found.')
+        return False
 
 
 def check(name, thing):

@@ -15,7 +15,9 @@ def configwrite():
                 'SimpleVerify': False,
                 'CheckOnBadges': True,
                 'PrintInvalidTokens': False,
-                'sslverificationonrequest': True
+                'sslverificationonrequest': True,
+                'numberOfThreads': 4,
+                'writefulllogs': False
             }
             config.write(file)
             log.debug('Config file written.')
@@ -30,11 +32,13 @@ def configread():
         checkonbadges = config.getboolean('Main', 'checkonbadges')
         printinvalidtokens = config.getboolean('Main', 'printinvalidtokens')
         sslverificationonrequest = config.getboolean('Main', 'sslverificationonrequest')
-        return printdebug, simpleverify, checkonbadges, printinvalidtokens, sslverificationonrequest
+        writefulllogs = config.getboolean('Main', 'writefulllogs')
+        numberofthreads = config.getint('Main', 'numberOfThreads')
+        return printdebug, simpleverify, checkonbadges, printinvalidtokens, sslverificationonrequest, numberofthreads, writefulllogs
     except FileNotFoundError:
         log.error('Couldn\'t find discer.q3 config file.')
     except Exception as e:
         log.error('Oops.. Something went wrong. Please contact with Moder. Error: config_configread_Exception')
         log.error(e)
         sys.exit(-2)
-    return False, False, False, False, False
+    return False, False, False, False, False, False, False
