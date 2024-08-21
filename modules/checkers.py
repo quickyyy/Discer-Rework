@@ -1,3 +1,4 @@
+import requests
 from modules.log import log
 from modules.dict import flags, nitro_types
 
@@ -45,3 +46,4 @@ def check_badges(response):
     if data_public > 0:
         badges = decode_flags(data_public)
         return " ".join(badges)
+

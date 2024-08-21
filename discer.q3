@@ -1,0 +1,9 @@
+[Main]
+printdebuglines = True
+simpleverify = False
+checkonbadges = True
+sslverificationonrequest = False
+numberOfThreads = 2
+writefulllogs = True
+useproxy = True
+proxytype = http

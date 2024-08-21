@@ -2,6 +2,7 @@ import logging
 from datetime import datetime
 from colorama import init, Fore, Style
 from configparser import ConfigParser
+import time
 
 init(autoreset=True)
 printdebug = False
@@ -67,16 +68,28 @@ log = Logger()
 
 
 def printlogo():
-    print(f'''
-    ______________________________________________________
-    $$$$$$$..|$$/..._______..._______...______....______..
-    $$.|..$$.|/..|./.......|./.......|./......\../......\.
-    $$.|..$$.|$$.|/$$$$$$$/./$$$$$$$/./$$$$$$..|/$$$$$$..|
-    $$.|..$$.|$$.|$$......\.$$.|......$$....$$.|$$.|..$$/.
-    $$.|__$$.|$$.|.$$$$$$..|$$.\_____.$$$$$$$$/.$$.|......
-    $$....$$/.$$.|/.....$$/.$$.......|$$.......|$$.|......
-    $$$$$$$/..$$/.$$$$$$$/...$$$$$$$/..$$$$$$$/.$$/....... Rework :D
-    ______________________________________________________
-    You can find me in telegram - @bredcookie
-    ______________________________________________________
-    ''')
+    gradient = [Fore.RED, Fore.YELLOW, Fore.GREEN, Fore.CYAN, Fore.BLUE, Fore.MAGENTA]
+
+    logo_lines = [
+        "    ______________________________________________________",
+        "    $$$$$$$..|$$/..._______..._______...______....______..",
+        "    $$.|..$$.|/..|./.......|./.......|./......\\../......\\.",
+        "    $$.|..$$.|$$.|/$$$$$$$/./$$$$$$$/./$$$$$$..|/$$$$$$..|",
+        "    $$.|..$$.|$$.|$$......\\.$$.|......$$....$$.|$$.|..$$/.",
+        "    $$.|__$$.|$$.|.$$$$$$..|$$.\\_____.$$$$$$$/.$$.|......",
+        "    $$....$$/.$$.|/.....$$/.$$.......|$$.......|$$.|......",
+        "    $$$$$$$/..$$/.$$$$$$$/...$$$$$$$/..$$$$$$$/.$$/....... Rework :D",
+        "    ______________________________________________________",
+        "    You can find me in telegram - @bredcookie",
+    ]
+
+    for shift in range(len(gradient)):
+        for i, line in enumerate(logo_lines):
+            color = gradient[(i + shift) % len(gradient)]
+            print(color + line)
+        time.sleep(0.2)
+        print('Im loading!')
+        print("\033c", end="") 
+    for i, line in enumerate(logo_lines):
+        color = gradient[i % len(gradient)]
+        print(color + line + Style.RESET_ALL)
