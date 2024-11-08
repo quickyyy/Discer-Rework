@@ -49,7 +49,7 @@ For discord, it doesn't matter how many requests come from one IP, at least on t
 All these settings are changed by changing the discer.q3 file, if it is not in the directory, the script will create a config and ask the user to change it and restart discer.
 ## Support
 
-For support, dm me in  t.me/quicky_lzt or join our @bredcookie channel.
+For support, dm me in  t.me/k3kzia or join our @bredcookie channel.
 
 
 ## License
